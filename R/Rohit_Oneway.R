@@ -1,5 +1,5 @@
 #' Oneway: An Alternative for Anova.
-#'  @param z a list of named components with factors
+
 #'  @param z A list of factors
 #'  @param y A list of values
 #'  @return object an Object of class \code{oneway}, basically a list of all elements:
@@ -26,37 +26,19 @@
 #'  \item{names_groups}{ Names of all groups }
 #'
 #'  \item{F_value}{ F value }
-#'    library(faraway)
-#' data(coagulation)
-#' coagulation[1:4,]
-#' Defaultdata <- oneway.default(unstack(coagulation))
-#' print.oneway(Defaultdata)
-# factors <- coagulation$diet
-#' Values1 <- coagulation$coag
-#' FactorData <- oneway.factor(factors, Values1)
-#' print.oneway(FactorData)
-#' FormulaData <- oneway.formula(as.formula("coag ~ diet"),data = as.list(coagulation))
-#' print.oneway(FormulaData)
-#' Defaultdatasummary <- summary.oneway(Defaultdata)
-
-#' print.summary.oneway(Defaultdatasummary)
-
-#' lsmeansdata <- lsmeans.oneway(Defaultdata)
-
-#' plot.oneway(Defaultdata)
-#' Default anova.
-#'
+#'  Oneway Object
 #' @param z a named list for \code{"anova"}
 #' @param \dots not used.
-
 #' @export
   oneway <- function(z, ...) UseMethod("oneway")
-
-#' @describeIn oneway oneway.default(z, ...)
+#' Oneway Default Fucntionality
 #' @param z a named list for \code{"anova"}
+#' @param \dots not used.
 #' @examples
 #' {
-#' RohitOnewayNewR:::oneway.default(c(A=c(30,31,32,31,30),B=c(34,33,31,32),C=c(32,33,34,35,31,30)))
+#' library(faraway)
+#' data(coagulation)
+#' RohitOnewayNewR:::oneway.default(unstack(coagulation))
 #' }
 #' @export
     oneway.default <- function(z, ...) {
@@ -88,9 +70,18 @@
   }
 
     #### 2. This method uses the more standard input of a factor representing groups (or samples) and a numeric response.
-  #' @describeIn oneway oneway.factor(z,y, ...)
+  #' Oneway Using Factors
+  #' @param z is a Factor
+  #' @param y is values
+  #' @param \dots not used.
   #' @examples
-  #' RohitOnewayNewR:::oneway.factor(as.factor(c("A","A","A","B","B","C","C","C","C")), c(31,32,31,30,34,32,34,35,30))
+  #' {
+  #' library(faraway)
+  #' data(coagulation)
+  #' z <- coagulation$diet
+  #' y <- coagulation$coag
+  #' RohitOnewayNewR:::oneway.factor(z,y)
+  #' }
   #' @export
       oneway.factor <- function(z, y, ...) {
     ## Your code here
@@ -105,9 +96,16 @@
 
   #### 3. The model formula is the standard for R models, but do not use **model.matrix** to implement **oneway**.
 
-      #' @describeIn oneway oneway.formula(formula, data = list(), ...)
+      #' Oneway Using Formula
+      #' @param formula is a formula type object
+      #' @param data is a list
+      #' @param \dots not used.
       #' @examples
+      #' {
+      #' library(faraway)
+      #' data(coagulation)
       #' RohitOnewayNewR:::oneway.formula(as.formula(coag ~ diet),coagulation)
+      #' }
       #' @export
 
     oneway.formula <- function(formula, data=list(), ...) {
@@ -125,11 +123,16 @@
     #### 4. The default **print** method should be short and provide essential information.
 
   #' Default print for anova.
-  #'
-  #' @param x an object of class \code{"anova"}, i.e., anova table.
+  #' @param x an object of class \code{"oneway"}, i.e., anova table.
   #' @param \dots not used.
+  #' @examples
+  #' {
+  #' library(faraway)
+  #' data(coagulation)
+  #' DefaultData <- RohitOnewayNewR:::oneway.default(unstack(coagulation))
+  #' RohitOnewayNewR:::print.oneway(DefaultData)
+  #' }
   #' @export
-
   print.oneway <- function(x, ...) {
 
     Table_aov <- with(x, rbind(SS = c(SSB, SSW),
@@ -142,7 +145,16 @@
   }
 
   #### 5. The summary method should create a summary object---not print directly.
-  #' @describeIn oneway summary.oneway(object, ...)
+  #' Oneway Summary
+  #' @param object an object of class \code{"oneway"}, i.e., anova table.
+  #' @param \dots not used.
+  #' @examples
+  #' {
+  #' library(faraway)
+  #' data(coagulation)
+  #' DefaultData <- RohitOnewayNewR:::oneway.default(unstack(coagulation))
+  #' RohitOnewayNewR:::summary.oneway(DefaultData)
+  #' }
   #' @export
     summary.oneway <- function(object, ...) {
     ## Your code here
@@ -164,6 +176,14 @@
   #'
   #' @param x an object of class \code{"summary.anova"}, i.e., a fitted model.
   #' @param \dots not used.
+  #' @examples
+  #' {
+  #' library(faraway)
+  #' data(coagulation)
+  #' DefaultData <- RohitOnewayNewR:::oneway.default(unstack(coagulation))
+  #' SummaryObj<- RohitOnewayNewR:::summary.oneway(DefaultData)
+  #' RohitOnewayNewR:::print.summary.oneway(SummaryObj)
+  #' }
   #' @export
   print.summary.oneway <- function(x, ...) {
     ## Your code here
@@ -204,8 +224,15 @@
 
   #' Print method for the Fishers LSD.
   #'
-  #' @param object an object of class \code{"anova"}, i.e., a fitted model.
+  #' @param object an object of class \code{"oneway"}, i.e., a fitted model.
   #' @param \dots not used.
+  #' @examples
+  #' {
+  #' library(faraway)
+  #' data(coagulation)
+  #' DefaultData <- RohitOnewayNewR:::oneway.default(unstack(coagulation))
+  #' RohitOnewayNewR:::lsmeans.oneway(DefaultData)
+  #' }
   #' @export
   lsmeans.oneway <- function(object, ...) {
     ## Your code here
@@ -241,8 +268,15 @@
 
   #' Plot method for the summary method.
   #'
-  #' @param x an object of class \code{"summary.anova"}, i.e., a fitted model.
+  #' @param x an object of class \code{"oneway"}, i.e., a fitted model.
   #' @param \dots not used.
+  #' @examples
+  #' {
+  #' library(faraway)
+  #' data(coagulation)
+  #' DefaultData <- RohitOnewayNewR:::oneway.default(unstack(coagulation))
+  #' RohitOnewayNewR:::plot.oneway(DefaultData)
+  #' }
   #' @export
 
   plot.oneway <- function(x, ...) {
@@ -260,30 +294,4 @@
   boxplot(as.formula("values ~ ind"),data = FinalList,xlab = "Factors", ylab = "Values", col = rainbow(length(unique(unlist(FinalList$values)))))
   title("Comparision of Distribution of Groups")
   }
-
-  #### 9. Your S3 class implementation should be illustrated with the *coagulation* data set. The data consists of blood coagulation times for 24 animals randomly assigned to four different diets.
-  library(faraway)
-  data(coagulation)
-  coagulation[1:4,]
-  ## Your implementation code here
-  Defaultdata <- oneway.default(unstack(coagulation))
-
-  print.oneway(Defaultdata)
-  factors <- coagulation$diet
-  Values1 <- coagulation$coag
-  FactorData <- oneway.factor(factors, Values1)
-  print.oneway(FactorData)
-  #print.oneway(FactorData)
-  FormulaData <- oneway.formula(as.formula("coag ~ diet"),data = as.list(coagulation))
-  print.oneway(FormulaData)
-  Defaultdatasummary <- summary.oneway(Defaultdata)
-
-  #summaryObj <- print.oneway(unstack(coagulation))
-
-  print.summary.oneway(Defaultdatasummary)
-
-  lsmeansdata <- lsmeans.oneway(Defaultdata)
-
-  plot.oneway(Defaultdata)
-
 

@@ -14,4 +14,13 @@
 \description{
 Print method for the summary method.
 }
+\examples{
+{
+library(faraway)
+data(coagulation)
+DefaultData <- RohitOnewayNewR:::oneway.default(unstack(coagulation))
+SummaryObj<- RohitOnewayNewR:::summary.oneway(DefaultData)
+RohitOnewayNewR:::print.summary.oneway(SummaryObj)
+}
+}
 

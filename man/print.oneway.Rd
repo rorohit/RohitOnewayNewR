@@ -7,11 +7,19 @@
 \method{print}{oneway}(x, ...)
 }
 \arguments{
-\item{x}{an object of class \code{"anova"}, i.e., anova table.}
+\item{x}{an object of class \code{"oneway"}, i.e., anova table.}
 
 \item{\dots}{not used.}
 }
 \description{
 Default print for anova.
+}
+\examples{
+{
+library(faraway)
+data(coagulation)
+DefaultData <- RohitOnewayNewR:::oneway.default(unstack(coagulation))
+RohitOnewayNewR:::print.oneway(DefaultData)
+}
 }
 

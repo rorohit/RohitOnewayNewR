@@ -2,34 +2,18 @@
 % Please edit documentation in R/Rohit_Oneway.R
 \name{oneway}
 \alias{oneway}
-\alias{oneway.default}
-\alias{oneway.factor}
-\alias{oneway.formula}
-\alias{summary.oneway}
 \title{Oneway: An Alternative for Anova.}
 \usage{
 oneway(z, ...)
-
-\method{oneway}{default}(z, ...)
-
-\method{oneway}{factor}(z, y, ...)
-
-\method{oneway}{formula}(formula, data = list(), ...)
-
-\method{summary}{oneway}(object, ...)
 }
 \arguments{
-\item{z}{a list of named components with factors}
+\item{z}{A list of factors}
 
 \item{y}{A list of values}
-
-\item{z}{A list of factors}
 
 \item{z}{a named list for \code{"anova"}}
 
 \item{\dots}{not used.}
-
-\item{z}{a named list for \code{"anova"}}
 }
 \value{
 object an Object of class \code{oneway}, basically a list of all elements:
@@ -56,40 +40,9 @@ object an Object of class \code{oneway}, basically a list of all elements:
  \item{names_groups}{ Names of all groups }
 
  \item{F_value}{ F value }
-   library(faraway)
-data(coagulation)
-coagulation[1:4,]
-Defaultdata <- oneway.default(unstack(coagulation))
-print.oneway(Defaultdata)
-Values1 <- coagulation$coag
-FactorData <- oneway.factor(factors, Values1)
-print.oneway(FactorData)
-FormulaData <- oneway.formula(as.formula("coag ~ diet"),data = as.list(coagulation))
-print.oneway(FormulaData)
-Defaultdatasummary <- summary.oneway(Defaultdata)
-print.summary.oneway(Defaultdatasummary)
-lsmeansdata <- lsmeans.oneway(Defaultdata)
-plot.oneway(Defaultdata)
-Default anova.
+ Oneway Object
 }
 \description{
 Oneway: An Alternative for Anova.
-}
-\section{Methods (by class)}{
-\itemize{
-\item \code{default}: oneway.default(z, ...)
-
-\item \code{factor}: oneway.factor(z,y, ...)
-
-\item \code{formula}: oneway.formula(formula, data = list(), ...)
-
-\item \code{oneway}: summary.oneway(object, ...)
-}}
-\examples{
-{
-RohitOnewayNewR:::oneway.default(c(A=c(30,31,32,31,30),B=c(34,33,31,32),C=c(32,33,34,35,31,30)))
-}
-RohitOnewayNewR:::oneway.factor(as.factor(c("A","A","A","B","B","C","C","C","C")), c(31,32,31,30,34,32,34,35,30))
-RohitOnewayNewR:::oneway.formula(as.formula(coag ~ diet),coagulation)
 }
 

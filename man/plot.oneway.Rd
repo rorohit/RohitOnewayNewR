@@ -7,11 +7,19 @@
 \method{plot}{oneway}(x, ...)
 }
 \arguments{
-\item{x}{an object of class \code{"summary.anova"}, i.e., a fitted model.}
+\item{x}{an object of class \code{"oneway"}, i.e., a fitted model.}
 
 \item{\dots}{not used.}
 }
 \description{
 Plot method for the summary method.
+}
+\examples{
+{
+library(faraway)
+data(coagulation)
+DefaultData <- RohitOnewayNewR:::oneway.default(unstack(coagulation))
+RohitOnewayNewR:::plot.oneway(DefaultData)
+}
 }
 
