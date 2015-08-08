@@ -1,0 +1,10 @@
+Package: RohitOnewayNewR
+Type: Package
+Title: What the Package Does (It Creats An Alternative Of ANOVA Table)
+Version: 0.1
+Date: 2015-08-07
+Author: Rohit Rohit
+Maintainer: Rohit Rohit <rorohit@mix.wvu.edu>
+Description: More about what it does (The Package Provides an alternative to Anova and accepts data in List with named group format as well as Factor format and Formula format. Output include consise Anova table, Summry Anova Table and BoxPlot)
+License: GPL-2
+LazyData: TRUE
